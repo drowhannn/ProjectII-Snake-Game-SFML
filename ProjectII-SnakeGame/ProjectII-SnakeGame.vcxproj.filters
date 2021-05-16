@@ -15,21 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SFML_Tutorial\SFML_Tutorial\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SFML_Tutorial\SFML_Tutorial\game.cpp">
+    <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SFML_Tutorial\SFML_Tutorial\game.h">
+    <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SFML_Tutorial\SFML_Tutorial\gamedata.bin">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>
