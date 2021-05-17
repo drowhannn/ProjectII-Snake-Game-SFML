@@ -122,12 +122,6 @@ void simulateGame(sf::RenderWindow* window)
 
 		}
 
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-			sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-			std::cout << "X: " << (float)mousePos.x << "Y: " << (float)mousePos.y << std::endl;
-		}
-
 		//display score
 		str = std::to_string(score);
 		text.setFont(scoreFont);
