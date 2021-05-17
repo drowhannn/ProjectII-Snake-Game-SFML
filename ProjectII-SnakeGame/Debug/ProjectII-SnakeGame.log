@@ -1,10 +1,2 @@
 ﻿  game.cpp
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\game.cpp(219,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\game.cpp(220,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\game.cpp(221,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\game.cpp(265,21): warning C4553: '==': result of expression not used; did you intend '='?
-  main.cpp
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\main.cpp(7,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\main.cpp(7,40): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-  Generating Code...
   ProjectII-SnakeGame.vcxproj -> C:\Users\drowh\source\repos\ProjectII-SnakeGame\Debug\ProjectII-SnakeGame.exe
