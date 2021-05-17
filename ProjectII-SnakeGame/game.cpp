@@ -42,7 +42,7 @@ Food f;
 
 void init()
 {
-	gameplayBackgroundTexture.loadFromFile("Resources/bg3.png");
+	gameplayBackgroundTexture.loadFromFile("Resources/bg.png");
 	gameplayBackground.setTexture(&gameplayBackgroundTexture);
 
 	titleFont.loadFromFile("Fonts/Signatria.ttf");

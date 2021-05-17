@@ -1,12 +1,10 @@
 #pragma once
 
-
-
 #define WIDTH 1280.0f
 #define HEIGHT 720.0f
 
-#define BORDERWIDTH 25.0f
-#define BORDERHEIGHT 25.0f
+#define BORDERWIDTH 30.0f
+#define BORDERHEIGHT 30.0f
 
 #define FPS 10
 
