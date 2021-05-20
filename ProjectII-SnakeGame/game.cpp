@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include "game.hpp"
 #include <iostream>
 #include <fstream>
@@ -6,31 +5,6 @@
 #include "Snake.hpp"
 #include "Food.hpp"
 #include "GameData.hpp"
-
-sf::RectangleShape gameplayBackground(sf::Vector2f(WIDTH, HEIGHT));
-sf::RectangleShape optionSelector(sf::Vector2f(20.0f, 20.0f));
-sf::RectangleShape gameoverBackground(sf::Vector2f(500.0f, 300.0f));
-
-
-sf::Texture gameplayBackgroundTexture;
-sf::Texture optionSelectorTexture;
-sf::Texture gameoverBackgroundTexture;
-
-sf::Text text;
-
-sf::Font titleFont;
-sf::Font optionsFont;
-sf::Font scoreFont;
-
-int mainmenuSelection;
-
-int score;
-
-bool newGame = true;
-
-bool firstLoop = true;
-
-GameState currentState;
 
 std::string str;
 
@@ -40,42 +14,64 @@ Snake s;
 
 Food f;
 
-void init()
+Game::Game() : currentState(MAINMENU), mainmenuSelection(0), score(0)
 {
-	gameplayBackgroundTexture.loadFromFile("Resources/bg.png");
-	gameplayBackground.setTexture(&gameplayBackgroundTexture);
+	window.create(sf::VideoMode(WIDTH, HEIGHT), GAME_TITLE);
 
-	titleFont.loadFromFile("Fonts/Signatria.ttf");
-	optionsFont.loadFromFile("Fonts/Baby Party.ttf");
-	scoreFont.loadFromFile("Fonts/SpecialElite-Regular.ttf");
+	gameBackground.setSize(sf::Vector2f(WIDTH, HEIGHT));
+	gameBackgroundTexture.loadFromFile(GAME_BACKGROUND_TEXTURE);
+	gameBackground.setTexture(&gameBackgroundTexture);
 
-	optionSelectorTexture.loadFromFile("Resources/optionSelector.png");
+
+	titleFont.loadFromFile(TITLE_FONT);
+	optionsFont.loadFromFile(OPTIONS_FONT);
+	scoreFont.loadFromFile(SCORE_FONT);
+
+	optionSelector.setSize(sf::Vector2f(20.0f, 20.0f));
+	optionSelectorTexture.loadFromFile(OPTION_SELECTOR_TEXTURE);
 	optionSelector.setTexture(&optionSelectorTexture);
 	optionSelector.setFillColor(sf::Color::Green);
 
-	gameoverBackgroundTexture.loadFromFile("Resources/gameover.png");
+	gameoverBackground.setSize(sf::Vector2f(500.0f, 300.0f));
+	gameoverBackgroundTexture.loadFromFile(GAMEOVER_BACKGROUND_TEXTURE);
 	gameoverBackground.setTexture(&gameoverBackgroundTexture);
 	gameoverBackground.setOrigin(250.0f, 150.0f);
 	gameoverBackground.setPosition(WIDTH / 2.f, HEIGHT / 2.f);
-
-
 }
 
-void setDefault()
+void Game::run()
+{
+	window.setFramerateLimit(FPS);
+	while (window.isOpen()) {
+
+		sf::Event event;
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
+
+		simulateGame();
+
+		window.display();
+
+	}
+}
+
+void Game::setDefault()
 {
 	score = 0;
 }
 
-void simulateGame(sf::RenderWindow* window)
+
+void Game::simulateGame()
 {
 	if (currentState != GAMEOVER) {
-		window->clear();
-		window->draw(gameplayBackground);
-	}
-	if (firstLoop)
-	{
-		init();
-		firstLoop = false;
+		window.clear();
+		window.draw(gameBackground);
 	}
 
 
@@ -100,10 +96,10 @@ void simulateGame(sf::RenderWindow* window)
 		s.move();
 
 		//display the snake
-		s.display(window);
+		s.display(&window);
 
 		//food
-		f.display(window);
+		f.display(&window);
 
 		//Collision
 		{
@@ -128,7 +124,7 @@ void simulateGame(sf::RenderWindow* window)
 		text.setPosition(WIDTH / 2.f, BORDERHEIGHT * 2);
 		text.setCharacterSize(50);
 		text.setString(str);
-		window->draw(text);
+		window.draw(text);
 
 
 
@@ -145,7 +141,7 @@ void simulateGame(sf::RenderWindow* window)
 		text.setCharacterSize(100);
 		text.setStyle(sf::Text::Bold);
 
-		window->draw(text);//title
+		window.draw(text);//title
 
 		text.setFont(optionsFont);
 		text.setFillColor(sf::Color::Cyan);
@@ -153,11 +149,11 @@ void simulateGame(sf::RenderWindow* window)
 
 		text.setString("Play");
 		text.setPosition(WIDTH / 2.1f, HEIGHT / 2.f);
-		window->draw(text);//play
+		window.draw(text);//play
 
 		text.setString("HighScores");
 		text.setPosition(WIDTH / 2.3f, HEIGHT / 1.5f);
-		window->draw(text);//highscores
+		window.draw(text);//highscores
 
 
 		//option selector
@@ -169,7 +165,7 @@ void simulateGame(sf::RenderWindow* window)
 		{
 			optionSelector.setPosition(WIDTH / 3.f, HEIGHT / 1.45f);
 		}
-		window->draw(optionSelector);
+		window.draw(optionSelector);
 
 		//input
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) ||
@@ -200,26 +196,26 @@ void simulateGame(sf::RenderWindow* window)
 	else if (currentState == GAMEOVER)
 	{
 
-		window->draw(gameoverBackground);
+		window.draw(gameoverBackground);
 
 		text.setString("Final Score: ");
 		text.setFont(optionsFont);
 		text.setCharacterSize(25);
 		text.setPosition(WIDTH / 2.f - 150, HEIGHT / 2.f - 80);
-		window->draw(text);
+		window.draw(text);
 
 		text.setString(str);
 		text.setFont(scoreFont);
 		text.setCharacterSize(100);
 		text.setPosition(WIDTH / 2.f + 80, HEIGHT / 2.f - 130);
-		window->draw(text);
+		window.draw(text);
 
 
 		text.setString("BACK TO MAINMENU");
 		text.setFont(optionsFont);
 		text.setCharacterSize(40);
 		text.setPosition(WIDTH / 2.f - 200, HEIGHT / 2.f + 20);
-		window->draw(text);
+		window.draw(text);
 
 		//input
 
@@ -239,7 +235,7 @@ void simulateGame(sf::RenderWindow* window)
 		text.setPosition(WIDTH / 2.f - 100, BORDERWIDTH + 10);
 		text.setCharacterSize(75);
 		text.setStyle(sf::Text::Bold);
-		window->draw(text);//title
+		window.draw(text);//title
 
 		text.setFont(optionsFont);
 		text.setFillColor(sf::Color::Cyan);
@@ -247,23 +243,23 @@ void simulateGame(sf::RenderWindow* window)
 
 		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 200);
 		text.setString("1.");
-		window->draw(text);
+		window.draw(text);
 
 		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 100);
 		text.setString("2.");
-		window->draw(text);
+		window.draw(text);
 
 		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 0);
 		text.setString("3.");
-		window->draw(text);
+		window.draw(text);
 
 		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f + 100);
 		text.setString("4.");
-		window->draw(text);
+		window.draw(text);
 
 		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f + 200);
 		text.setString("5.");
-		window->draw(text);
+		window.draw(text);
 
 		text.setCharacterSize(50);
 		text.setFont(scoreFont);
@@ -272,7 +268,7 @@ void simulateGame(sf::RenderWindow* window)
 			text.setPosition(WIDTH / 2.f, (HEIGHT / 2.f - 200) + i * 100);
 			str = std::to_string(gamedata.getHighScore(i));
 			text.setString(str);
-			window->draw(text);
+			window.draw(text);
 
 		}
 

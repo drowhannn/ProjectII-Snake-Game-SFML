@@ -44,5 +44,8 @@
     <ClInclude Include="GameData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Definations.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

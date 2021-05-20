@@ -5,9 +5,9 @@ extern Food f;
 
 Snake::Snake()
 {
-	snakeHeadTexture.loadFromFile("Resources/snakeHead1.png");
-	snakeTail1Texture.loadFromFile("Resources/snakeTail11.png");
-	snakeTail2Texture.loadFromFile("Resources/snakeTail21.png");
+	snakeHeadTexture.loadFromFile(SNAKE_HEAD_TEXTURE);
+	snakeTail1Texture.loadFromFile(SNAKE_TAIL1_TEXTURE);
+	snakeTail2Texture.loadFromFile(SNAKE_TAIL2_TEXTURE);
 
 	for (int i = 0; i < MAX; i++)
 	{

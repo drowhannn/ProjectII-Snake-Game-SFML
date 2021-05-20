@@ -26,6 +26,7 @@
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Definations.hpp" />
     <ClInclude Include="Food.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="GameData.hpp" />

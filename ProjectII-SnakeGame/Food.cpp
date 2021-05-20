@@ -5,7 +5,7 @@ Food::Food()
 {
 	food.setSize(sf::Vector2f(foodSize, foodSize));
 	food.setOrigin(sf::Vector2f(foodSize / 2.f, foodSize / 2.f));
-	foodTexture.loadFromFile("Resources/food1.png");
+	foodTexture.loadFromFile(FOOD_TEXTURE);
 	food.setTexture(&foodTexture);
 }
 

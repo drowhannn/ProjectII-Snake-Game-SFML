@@ -2,9 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "game.hpp"
-
-#define MAX 60
-#define DEFAULTLENGTH 5
+#include "Definations.hpp"
 
 enum SnakeDirection {
 	STOP,
