@@ -2,8 +2,4 @@
 C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(21,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(22,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(23,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Snake.cpp
-  game.cpp
-  main.cpp
-  Generating Code...
   ProjectII-SnakeGame.vcxproj -> C:\Users\drowh\source\repos\ProjectII-SnakeGame\Debug\ProjectII-SnakeGame.exe

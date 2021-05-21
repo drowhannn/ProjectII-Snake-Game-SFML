@@ -69,6 +69,9 @@ void Game::setDefault()
 
 void Game::simulateGame()
 {
+	sf::Mouse mouse;
+	sf::Vector2i mousePos = mouse.getPosition(window);
+
 	if (currentState != GAMEOVER) {
 		window.clear();
 		window.draw(gameBackground);
@@ -148,18 +151,26 @@ void Game::simulateGame()
 		text.setCharacterSize(30);
 
 		text.setString("Play");
-		text.setPosition(WIDTH / 2.1f, HEIGHT / 2.f);
+		text.setPosition(WIDTH / 2.1f, HEIGHT / 2.5f);
 		window.draw(text);//play
 
 		text.setString("HighScores");
-		text.setPosition(WIDTH / 2.3f, HEIGHT / 1.5f);
+		text.setPosition(WIDTH / 2.3f, HEIGHT / 1.9f);
 		window.draw(text);//highscores
+
+		text.setString("Exit");
+		text.setPosition(WIDTH / 2.1f, HEIGHT / 1.5f);
+		window.draw(text);//exit
 
 
 		//option selector
 		if (mainmenuSelection == 0)
 		{
-			optionSelector.setPosition(WIDTH / 3.f, HEIGHT / 1.9f);
+			optionSelector.setPosition(WIDTH / 3.f, HEIGHT / 2.45f);
+		}
+		else if(mainmenuSelection==1)
+		{
+			optionSelector.setPosition(WIDTH / 3.f, HEIGHT / 1.85f);
 		}
 		else
 		{
@@ -167,29 +178,36 @@ void Game::simulateGame()
 		}
 		window.draw(optionSelector);
 
-		//input
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		//mouse click
+		bool isCursorClickable = false;
+
+		if (mousePos.y > 250 && mousePos.y<350) mainmenuSelection = 0;
+		else if (mousePos.y > 350 && mousePos.y<450) mainmenuSelection = 1;
+		else if (mousePos.y > 450 && mousePos.y<550) mainmenuSelection = 2;
+
+		if (mousePos.x > 530 && mousePos.x < 780)
 		{
-			if (mainmenuSelection == 0) mainmenuSelection = 1;
-			else mainmenuSelection = 0;
+			isCursorClickable = true;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+
+		//input
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)
+			|| (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)&& isCursorClickable))
 		{
-			if (mainmenuSelection == 0)
+			switch (mainmenuSelection)
 			{
+			case 0:
 				newGame = true;
 				currentState = GAMEPLAY;
-			}
-			else
-			{
+				break;
+			case 1:
 				currentState = HIGHSCORE;
+				break;
+			case 2:
+				exit(0);
+				break;
 			}
 		}
-
-
 
 	}
 
@@ -217,9 +235,20 @@ void Game::simulateGame()
 		text.setPosition(WIDTH / 2.f - 200, HEIGHT / 2.f + 20);
 		window.draw(text);
 
+		//mouse
+		bool isCursorClickable = false;
+
+		if (mousePos.x > 390 && mousePos.x < 890 &&
+			mousePos.y>350 && mousePos.y < 470)
+		{
+			isCursorClickable = true;
+		}
+
+
 		//input
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) ||
+			(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isCursorClickable))
 		{
 			currentState = MAINMENU;
 		}
@@ -241,40 +270,48 @@ void Game::simulateGame()
 		text.setFillColor(sf::Color::Cyan);
 		text.setCharacterSize(25);
 
-		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 200);
-		text.setString("1.");
-		window.draw(text);
+		for (int i = 0; i < 5; i++)
+		{
+			text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 175 + i * 75);
+			str = std::to_string(i + 1);
+			text.setString(str);
+			window.draw(text);
+			text.setString(".");
+			text.setPosition(WIDTH / 2.f - 13, HEIGHT / 2.f - 175 + i * 75);
+			window.draw(text);
 
-		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 100);
-		text.setString("2.");
-		window.draw(text);
-
-		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f - 0);
-		text.setString("3.");
-		window.draw(text);
-
-		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f + 100);
-		text.setString("4.");
-		window.draw(text);
-
-		text.setPosition(WIDTH / 2.f - 30, HEIGHT / 2.f + 200);
-		text.setString("5.");
-		window.draw(text);
-
-		text.setCharacterSize(50);
+		}
+		
+		text.setCharacterSize(40);
 		text.setFont(scoreFont);
 		for (int i = 0; i < 5; i++)
 		{
-			text.setPosition(WIDTH / 2.f, (HEIGHT / 2.f - 200) + i * 100);
+			text.setPosition(WIDTH / 2.f+10, (HEIGHT / 2.f - 175) + i * 75);
 			str = std::to_string(gamedata.getHighScore(i));
 			text.setString(str);
 			window.draw(text);
 
 		}
 
+		text.setString("BACK TO MAINMENU");
+		text.setFont(optionsFont);
+		text.setCharacterSize(30);
+		text.setPosition(WIDTH / 2.f - 140, HEIGHT / 2.f + 200);
+		window.draw(text);
 
+		//mouse
+		bool isCursorClickable = false;
+
+		if (mousePos.x > 475 &&
+			mousePos.x < 830 &&
+			mousePos.y >540 &&
+			mousePos.y < 615)
+		{
+			isCursorClickable = true;
+		}
 		//input
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) ||
+			(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && isCursorClickable))
 		{
 			currentState = MAINMENU;
 		}
