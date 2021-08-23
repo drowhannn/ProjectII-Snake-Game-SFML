@@ -1,5 +1,1 @@
-﻿  Food.cpp
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(21,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(22,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\drowh\source\repos\ProjectII-SnakeGame\ProjectII-SnakeGame\Food.cpp(23,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  ProjectII-SnakeGame.vcxproj -> C:\Users\drowh\source\repos\ProjectII-SnakeGame\Debug\ProjectII-SnakeGame.exe
+﻿  ProjectII-SnakeGame.vcxproj -> C:\MyDrive\ProjectII-Snake-Game-SFML\Debug\ProjectII-SnakeGame.exe
